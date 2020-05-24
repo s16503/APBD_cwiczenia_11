@@ -10,6 +10,10 @@ namespace APBD_cwiczenia_11.Models
     {
 
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<Prescription> Prescriptions { get; set; }
+
 
         public DoctorsDbContext()
         {
@@ -46,6 +50,38 @@ namespace APBD_cwiczenia_11.Models
             {
                 builder.HasKey(p => p.IdPrescription);
             });
+
+            modelBuilder.Entity<Patient>((builder) =>
+            {
+                builder.HasKey(p => p.IdPatient);
+                builder.Property(p => p.IdPatient).ValueGeneratedOnAdd();
+                builder.Property(p => p.FirstName).IsRequired();
+
+                builder.HasMany(p => p.Prescriptions)
+                      .WithOne(p => p.Patient)
+                      .HasForeignKey(p => p.IdPatient)
+                      .IsRequired();
+
+            });
+
+
+
+
+            modelBuilder.Entity<Medicament>((builder) =>
+            {
+                builder.HasKey(m => m.IdMedicament);
+                builder.Property(m => m.IdMedicament).ValueGeneratedOnAdd();
+            });
+
+            //modelBuilder.Entity<Prescription_Medicament>((builder) =>
+            //{
+            //    builder.HasOne(pm => pm.IdMedicament);
+            //    builder.Property(pm => pm.IdMedicament).ValueGeneratedOnAdd();
+            //});
         }
+
+
+      
+
     }
 }

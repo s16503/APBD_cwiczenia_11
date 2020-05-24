@@ -12,6 +12,10 @@ namespace APBD_cwiczenia_11.Models
         //...
         //[ForeignKey("Doctor")]
         public int IdDoctor { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime DueDate { get; set; }
+        public int IdPatient { get; set; }
         public virtual Doctor Doctor { get; set; }
+        public virtual Patient Patient { get; set; }
     }
 }

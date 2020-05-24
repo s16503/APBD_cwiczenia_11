@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APBD_cwiczenia_11.Models;
+using APBD_cwiczenia_11.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,9 @@ namespace APBD_cwiczenia_11
             {
                 options.UseSqlServer("Data Source=db-mssql;Initial Catalog=s16503;Integrated Security=True;");
             });
+
+            services.AddScoped<IDbService, DoctorsDbService>();
+
             services.AddControllers();
         }
 
